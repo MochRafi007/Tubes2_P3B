@@ -23,19 +23,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected Button start;
     protected TextView score;
     protected TextView highScore;
+    protected TextView value_score;
+    protected TextView value_highScore;
     protected Canvas mCanvas;
     protected boolean status;
     protected Paint strokePaint;
 
-    protected String nilai;
-    protected String currentNilai;
+    protected int nilai;
+    protected int currentNilai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.nilai="100";
+        this.nilai=100;
         this.status=false;
+        this.value_score=findViewById(R.id.value_score);
+        this.value_highScore=findViewById(R.id.value_highScore);
         this.iv_00 = findViewById(R.id.iv_00);
         this.start = findViewById(R.id.start);
         this.start.setOnClickListener(this);
@@ -57,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             Log.d("Coba", "WOy");
 
             this.currentNilai+=this.nilai;
-            this.score.setText("Score: 100");
+            this.value_score.setText(""+this.currentNilai);
+            this.value_highScore.setText(""+this.currentNilai);
             //this.score.setText("Score: 100"+this.score);
 
         }
