@@ -3,4 +3,8 @@
     <string name="score">Score :</string>
     <string name="high_score">High Score :</string>
     <string name="start">START</string>
+    <string name="bt_playNewGame">NEW GAME</string>
+    <string name="bt_quitGame">QUIT GAME</string>
+    <string name="bt_backToMenu">MAIN MENU</string>
+    <string name="tv_chooseLevel">Choose Level</string>
 </resources>

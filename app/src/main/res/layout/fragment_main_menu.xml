@@ -1,0 +1,32 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/bt_playNewGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100px"
+            android:paddingRight="100px"
+            android:text="@string/bt_playNewGame">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt_quitGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100px"
+            android:paddingRight="100px"
+            android:text="@string/bt_quitGame">
+
+        </Button>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="80px"
+            android:text="@string/tv_chooseLevel"
+            android:gravity="center"
+            android:layout_marginBottom="50px">
+
+        </TextView>
+        <Button
+            android:id="@+id/bt_levelSatu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100px"
+            android:paddingRight="100px"
+            android:text="1">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt_levelDua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100px"
+            android:paddingRight="100px"
+            android:text="2">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt_levelTiga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100px"
+            android:paddingRight="100px"
+            android:text="2">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt_backToMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="100px"
+            android:paddingRight="100px"
+            android:text="@string/bt_backToMenu">
+
+        </Button>
+    </LinearLayout>
+</RelativeLayout>
