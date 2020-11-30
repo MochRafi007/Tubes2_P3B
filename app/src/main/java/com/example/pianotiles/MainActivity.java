@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected ImageView iv_00;
     protected Bitmap mBitmap;
     //  protected GestureDetector mDetector;
-
+// test
     protected Button start;
     protected TextView score;
     protected TextView highScore;
