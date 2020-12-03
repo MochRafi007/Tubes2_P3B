@@ -5,9 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,23 +15,17 @@ import android.widget.TextView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-public class PlayGameFragment extends Fragment implements View.OnClickListener, View.OnTouchListener {
-    protected ImageView iv_00;
-    protected Bitmap mBitmap;
-    //  protected GestureDetector mDetector;
-// test
-    protected Button start;
-    protected TextView score;
-    protected TextView highScore;
-    protected TextView value_score;
-    protected TextView value_highScore;
-    protected Canvas mCanvas;
-    protected boolean status;
-    protected Paint strokePaint;
-
-    protected int nilai;
-    protected int currentNilai;
+public class PlayGameFragment extends Fragment implements View.OnClickListener{
     public FragmentListener listener;
+    protected Button btnStart;
+    protected Bitmap mBitmap;
+    protected ImageView ivCanvas;
+    protected Canvas mCanvas;
+    protected UIThreadedWrapper uiThreadedWrapper;
+    protected Tiles tiles;
+    protected TilesThread tilesThread;
+    protected boolean canvasIsClean;
+    protected TextView tvScore;
     public PlayGameFragment(){
 
     }
@@ -49,17 +41,15 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_play_game,container,false);
-        this.nilai=100;
-        this.status=false;
-        this.value_score=view.findViewById(R.id.value_score);
-        this.value_highScore=view.findViewById(R.id.value_highScore);
-        this.iv_00 = view.findViewById(R.id.iv_00);
-        this.start = view.findViewById(R.id.start);
-        this.start.setOnClickListener(this);
-        this.score =(TextView) view.findViewById(R.id.tv_score);
-        this.highScore =(TextView) view.findViewById(R.id.tv_high_score);
-        //this.iv_00.setClickable(true);
-        this.iv_00.setOnClickListener(this);
+        this.btnStart = view.findViewById(R.id.btn_start);
+        this.ivCanvas = view.findViewById(R.id.iv_canvas);
+
+        this.btnStart.setOnClickListener(this);
+
+        this.canvasIsClean = true;
+
+        this.uiThreadedWrapper = new UIThreadedWrapper(this);
+
         return view;
     }
 
@@ -75,56 +65,48 @@ public class PlayGameFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        if(v==this.start)
-        {
-            this.start.setVisibility(v.GONE);
-            status=true;
-        }
-        if(this.iv_00==v && this.status==true)
-        {
-            Log.d("Coba", "WOy");
-
-            this.currentNilai+=this.nilai;
-            this.value_score.setText(""+this.currentNilai);
-            this.value_highScore.setText(""+this.currentNilai);
-            //this.score.setText("Score: 100"+this.score);
-
+        if (v.getId() == this.btnStart.getId()){
+            if(this.canvasIsClean){
+                this.createFirstTiles();
+                this.tilesThread.moveTiles();
+            }
         }
     }
 
-    public void initiateCanvas()
-    {
-        this.mBitmap = Bitmap.createBitmap(mCanvas.getWidth(),mCanvas.getHeight(), Bitmap.Config.ARGB_8888);
+    public void createFirstTiles(){
+        this.tiles = new Tiles(0,0,this.ivCanvas.getWidth()/4,450,this.ivCanvas.getHeight());
+        this.tilesThread = new TilesThread(this.uiThreadedWrapper,this.tiles,this.ivCanvas.getWidth()/4);
+        mBitmap = Bitmap.createBitmap(this.ivCanvas.getWidth(),this.ivCanvas.getHeight(),Bitmap.Config.ARGB_8888);
 
-        this.iv_00.setImageBitmap(this.mBitmap);
+        this.ivCanvas.setImageBitmap(this.mBitmap);
 
         this.mCanvas = new Canvas(this.mBitmap);
 
-        this.resetCanvas();
+        Paint paint = new Paint();
+        int mColorTest = ResourcesCompat.getColor(getResources(),R.color.colorPrimary,null);
+        paint.setColor(mColorTest);
 
-        // this.iv_00.setOnTouchListener(this);
+        this.mCanvas.drawRect(tiles.getLeft(),tiles.getTop(),tiles.getRight(),tiles.getBottom(),paint);
+
+        this.ivCanvas.invalidate();
+    }
+
+    public void createTiles(Tiles tiles){
+        this.deleteTiles();
+        Paint paint = new Paint();
+        int mColorTest = ResourcesCompat.getColor(getResources(),R.color.colorPrimary,null);
+        paint.setColor(mColorTest);
+        this.mCanvas.drawRect(tiles.getLeft(),tiles.getTop(),tiles.getRight(),tiles.getBottom(),paint);
+    }
+
+    public void deleteTiles(){
+        this.resetCanvas();
     }
 
     public void resetCanvas(){
-        // 4. Draw canvas background
-        int mColorBackground = ResourcesCompat.getColor(getResources(),R.color.white,null);
-        int mColorBlack = ResourcesCompat.getColor(getResources(),R.color.black,null);
-        this.mCanvas.drawColor(mColorBackground);
-        // 5. force draw
-        this.iv_00.invalidate();
-        // 6. reset stroke width + color
-        this.strokePaint.setStyle(Paint.Style.STROKE);
-        this.changeStrokeColor(mColorBlack);
-        this.strokePaint.setStrokeWidth(10);
-    }
+        int mColorBackground = ResourcesCompat.getColor(getResources(),R.color.deletecolor,null);
+        mCanvas.drawColor(mColorBackground);
 
-    private void changeStrokeColor(int color) {
-        //change stroke color using parameter (color resource id)
-        this.strokePaint.setColor(color);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
+        this.ivCanvas.invalidate();
     }
 }
