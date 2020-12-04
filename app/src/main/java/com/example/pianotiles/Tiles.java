@@ -1,7 +1,7 @@
 package com.example.pianotiles;
 
 public class Tiles {
-    protected int left,top,right,bottom,canvasWidth;
+    protected int left,top,right,bottom,canvasWidth,lives;
     protected boolean isClicked;
 
     public Tiles(int left, int top, int right, int bottom,int canvasWidth){
@@ -11,6 +11,15 @@ public class Tiles {
         this.bottom = bottom;
         this.canvasWidth = canvasWidth;
         this.isClicked = false;
+        this.lives = 3;
+    }
+
+    public void setLives(int lives){
+        this.lives = lives;
+    }
+
+    public int getLives(){
+        return  this.lives;
     }
 
     public int getLeft() {
@@ -32,6 +41,13 @@ public class Tiles {
     public void setNewCoordinate(){
         this.top +=10;
         this.bottom +=10;
+    }
+
+    public void setFirstCoordinate(int left, int top, int right, int bottom) {
+        this.bottom = bottom;
+        this.left = left;
+        this.top = top;
+        this.right = right;
     }
 
     public boolean canMove(){
