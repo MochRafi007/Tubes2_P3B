@@ -4,26 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="score :"
+            android:textSize="60px">
+
+        </TextView>
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="score"
+            android:layout_marginLeft="200px"
+            android:textSize="60px">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="lives :"
+            android:textSize="60px"
+            android:layout_marginLeft="400px">
+
+        </TextView>
+        <TextView
+            android:id="@+id/tv_lives"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="3"
+            android:layout_marginLeft="600px"
+            android:textSize="60px">
+
+        </TextView>
+
         <Button
             android:id="@+id/btn_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start">
+            android:text="Start"
+            android:layout_alignParentRight="true">
 
         </Button>
 
-        <Button
-            android:id="@+id/btn_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stop">
-
-        </Button>
-    </LinearLayout>
+    </RelativeLayout>
     <ImageView
         android:id="@+id/iv_canvas"
         android:layout_width="match_parent"
