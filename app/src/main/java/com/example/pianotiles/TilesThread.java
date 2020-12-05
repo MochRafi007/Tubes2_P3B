@@ -1,5 +1,11 @@
 package com.example.pianotiles;
 
+import android.content.res.Resources;
+import android.graphics.Paint;
+import android.util.Log;
+
+import androidx.core.content.res.ResourcesCompat;
+
 import java.time.LocalTime;
 import java.util.Random;
 
@@ -18,7 +24,7 @@ public class TilesThread implements Runnable{
         this.tiles = tiles;
         this.gameOver = false;
         this.tilesWidth = tilesWidth;
-        this.speed = 20;
+        this.speed = 100;
         this.canvasHeight = canvasHeight;
         this.isTilesClicked = false;
         this.playGameFragment = new PlayGameFragment();
@@ -48,13 +54,28 @@ public class TilesThread implements Runnable{
 
     @Override
     public void run() {
-        while(this.tiles.canMove()&&!this.gameOver){
-            if (this.tiles.getTop()<=this.canvasHeight&&!this.gameOver){
+        while(this.tiles.canMove()&&!this.tiles.isGameOver()){
+            if (this.tiles.getTop()<=this.canvasHeight&&!this.tiles.isGameOver()){
                 this.tiles.setNewCoordinate();
                 this.uiThreadedWrapper.setNexTiles(this.tiles);
                 try
                 {
-                    Thread.sleep(this.speed);
+                    if(this.tiles.getScore()>=1 && this.tiles.getScore()<2){
+                        Log.d("1", "run: "+ this.speed);
+                        Thread.sleep(50);
+                    }
+                    else if(this.tiles.getScore()>=2 && this.tiles.getScore()<4){
+                        Log.d("2","run: "+ this.speed);
+                        Thread.sleep(25);
+                    }
+                    else if(this.tiles.getScore()>=4){
+                        Log.d("3","run: "+ this.speed);
+                        Thread.sleep(10);
+                    }
+                    else {
+                        Log.d("anjing", "run: " + this.tiles.getScore());
+                        Thread.sleep(this.speed);
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -65,6 +86,7 @@ public class TilesThread implements Runnable{
                 if(this.tiles.getLives()>=0) { //kalo masih bernyawa, jalanin
                     this.randPos();
                     this.setTilesClicked(false);
+//                    this.tiles.isClicked(true);
                     this.tiles.setFirstCoordinate((int) this.newLeft, -450, (int) this.newRight, 0);
                     this.tiles.setNewCoordinate();
                     this.uiThreadedWrapper.setNexTiles(this.tiles);
@@ -75,8 +97,9 @@ public class TilesThread implements Runnable{
                     }
                 }
             }
-            if (this.tiles.getLives() <0){
-                this.gameOver = true;
+            if (this.tiles.getLives() <1){
+                this.tiles.setIsGameOver(true);
+                Log.d("game", "run: " + this.tiles.isGameOver());
             }
         }
     }

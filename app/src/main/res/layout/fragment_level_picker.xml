@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/white"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="100px"
             android:paddingRight="100px"
-            android:text="2">
+            android:text="3">
 
         </Button>
 

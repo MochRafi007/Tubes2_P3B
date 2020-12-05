@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             }else{
                 ft.add(R.id.fragment_container,this.mainMenuFragment);
             }
-
             if (this.levelPickerFragment.isAdded()){
                 ft.hide(this.levelPickerFragment);
             }
@@ -61,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             }
             if(this.mainMenuFragment.isAdded()){
                 ft.hide(this.mainMenuFragment);
-            }else if (this.playGameFragment.isAdded()) {
+            }
+            else if (this.playGameFragment.isAdded()) {
                 ft.hide(this.playGameFragment);
             }
         }else if(page==3){
@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements FragmentListener 
             }
             if(this.mainMenuFragment.isAdded()){
                 ft.hide(this.mainMenuFragment);
-            }else if (this.levelPickerFragment.isAdded()) {
+            }
+            else if (this.levelPickerFragment.isAdded()) {
                 ft.hide(this.levelPickerFragment);
             }
         }
