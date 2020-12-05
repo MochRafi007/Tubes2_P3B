@@ -1,17 +1,30 @@
 package com.example.pianotiles;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 public class LevelPickerFragment extends Fragment implements View.OnClickListener {
     protected Button lv1,lv2,lv3,btBack;
+    protected FragmentListener fragmentListener;
     public LevelPickerFragment(){
+    }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof  FragmentListener){
+            this.fragmentListener = (FragmentListener) context;
+        }else{
+            throw new ClassCastException(context.toString()
+                    + "must implements FragmentListener");
+        }
     }
 
     public static LevelPickerFragment newInstance(String title){
@@ -39,11 +52,9 @@ public class LevelPickerFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v){
         if(v.getId() == this.btBack.getId()){
-            MainActivity mainActivity = (MainActivity)getActivity();
-            mainActivity.changePage(1);
+            fragmentListener.changePage(1);
         }else if(v.getId() == this.lv1.getId()){
-            MainActivity mainActivity = (MainActivity)getActivity();
-            mainActivity.changePage(3);
+            fragmentListener.changePage(3);
         }
     }
 

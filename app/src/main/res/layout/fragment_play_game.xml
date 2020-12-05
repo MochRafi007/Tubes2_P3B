@@ -1,67 +1,154 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
+    >
+    <LinearLayout
+        android:id="@+id/layout_background"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="3"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="score :"
+                android:textSize="20dp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:layout_weight="1"
+                android:textSize="20dp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="lives :"
+                android:textSize="20dp"
+                android:layout_weight="1">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tv_lives"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:layout_weight="1"
+                android:textSize="20dp">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/btn_start"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Start"
+                android:layout_weight="1">
+            </Button>
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_canvas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            >
+        </ImageView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_gameover"
+        android:layout_centerInParent="true"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="score :"
-            android:textSize="60px">
-
-        </TextView>
-        <TextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="score"
-            android:layout_marginLeft="200px"
-            android:textSize="60px">
-
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="lives :"
-            android:textSize="60px"
-            android:layout_marginLeft="400px">
-
-        </TextView>
-        <TextView
-            android:id="@+id/tv_lives"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="3"
-            android:layout_marginLeft="600px"
-            android:textSize="60px">
-
-        </TextView>
-
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:layout_alignParentRight="true">
-
-        </Button>
-
-    </RelativeLayout>
-    <ImageView
-        android:id="@+id/iv_canvas"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ImageView>
-</LinearLayout>
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@color/black"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/score"
+                android:textColor="@color/white"
+                android:textSize="24dp">
+            </TextView>
+            <TextView
+                android:id="@+id/tv_score_gameover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:layout_weight="2"
+                android:text=": 0"
+                android:textAlignment="center"
+                android:textSize="20dp">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:text="@string/high_score"
+                android:layout_weight="1"
+                android:textSize="24dp">
+            </TextView>
+            <TextView
+                android:id="@+id/tv_highscore_gameover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:layout_weight="2"
+                android:textAlignment="center"
+                android:text=": 0"
+                android:textSize="24dp">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+            <Button
+                android:id="@+id/btn_retry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/retry">
+            </Button>
+            <Button
+                android:id="@+id/btn_exit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/exit">
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -18,6 +18,7 @@ public class UIThreadedWrapper extends Handler {
         if (msg.what==UIThreadedWrapper.MSG_SET_IMAGEVIEW_OUTPUT){
             Tiles tiles = (Tiles) msg.obj;
             this.mainActivity.createTiles(tiles);
+//            this.mainActivity.showModal();
         }
     }
 

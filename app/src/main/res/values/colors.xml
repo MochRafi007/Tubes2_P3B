@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="deletecolor">#ffffff</color>
+    <color name="pressed">#8B42F3</color>
 </resources>
